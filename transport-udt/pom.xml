@@ -66,17 +66,4 @@
     </dependency>
 
   </dependencies>
-
-  <build>
-    <plugins>
-      <!-- run each test in separate JVM -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <forkMode>always</forkMode>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>

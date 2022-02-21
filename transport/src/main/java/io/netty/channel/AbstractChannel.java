@@ -447,6 +447,7 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
                     return;
                 }
                 boolean firstRegistration = neverRegistered;
+                //  这里会把channel 的java socket和 event loop持有的select 进行注册 关联在一起
                 doRegister();
                 neverRegistered = false;
                 registered = true;
@@ -454,7 +455,7 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
                 // Ensure we call handlerAdded(...) before we actually notify the promise. This is needed as the
                 // user may already fire events through the pipeline in the ChannelFutureListener.
                 pipeline.invokeHandlerAddedIfNeeded();
-
+                // socket 和 selector 注册之后 这里会回调 socket 进行bind()
                 safeSetSuccess(promise);
                 pipeline.fireChannelRegistered();
                 // Only fire a channelActive if the channel has never been registered. This prevents firing
@@ -467,6 +468,7 @@ public abstract class AbstractChannel extends DefaultAttributeMap implements Cha
                         // again so that we process inbound data.
                         //
                         // See https://github.com/netty/netty/issues/4805
+                        // socket bind()之后 这里会select 注册关注读事件
                         beginRead();
                     }
                 }

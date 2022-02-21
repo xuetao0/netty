@@ -78,22 +78,6 @@
           <skip>true</skip>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <testSourceDirectory>${project.build.sourceDirectory}</testSourceDirectory>
-          <testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
-          <excludes>
-            <exclude>**/AbstractMicrobenchmark.java</exclude>
-            <exclude>**/*$*.class</exclude>
-            <exclude>**/generated/*.class</exclude>
-          </excludes>
-          <systemPropertyVariables>
-            <perfReportDir>${project.build.directory}/reports/performance/</perfReportDir>
-          </systemPropertyVariables>
-        </configuration>
-      </plugin>
     </plugins>
   </build>
 </project>
